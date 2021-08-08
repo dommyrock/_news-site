@@ -1,0 +1,114 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Work Sans", sans-serif;
+  color: var(--default-text-grey);
+  font-weight: 500;
+  background: var(--bg-color);
+  height: 100%;
+  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+    Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
+}
+:root {
+  --light-blue: #4b8bced6;
+  --arcticBlue: #6997ff;
+  --default-text-grey: #6f6d6d;
+  --text-lightgrey: #c4c0c0;
+  --bg-color: #d8d8d8;
+  --bg-colorDark: #4c4949;
+  --bg-colorDarker: #302f2f;
+  --bg-colorDarkest: #111111;
+  --nav-textColor: #fff;
+  --nav-spanColor: rgba(54, 51, 51, 1);
+  --left: 0;
+}
+* {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  display: grid;
+}
+
+/* Scrollbar css */
+body::-webkit-scrollbar {
+  width: 0.8em;
+  background-color: var(--default-text-grey);
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--bg-colorDark);
+  border: 1px solid var(--bg-colorDark);
+  border-radius: 5px;
+}
+
+.horiz-timeline {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 8rem;
+}
+.horiz-timeline ul {
+  /* overflow-x: hidden; */
+  list-style-type: none;
+  white-space: nowrap;
+  display: flex;
+  align-items: stretch; /* Default */
+  justify-content: space-between;
+  width: 100%;
+  background: #cacaca;
+  margin: 0;
+  padding: 0;
+}
+
+.horiz-timeline ul li {
+  display: block;
+  flex: 0 1 auto; /* Default */
+  list-style-type: none;
+  padding: 0.6rem;
+  /* transition: transform 250ms; */
+}
+
+.horiz-timeline ul li:hover {
+  background-color: var(--bg-colorDarker);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 40%;
+  /* transform: translateY(-5px); */
+}
+
+/* Animated vertical lines [i got 2 linws top 2 bottom...]*/
+.horiz-timeline ul:after {
+  content: "";
+  border-left: 5px solid rgb(68, 74, 79);
+  position: absolute;
+  opacity: 0;
+  /* vertical line lenght outside of ul */
+  top: 1rem;
+  bottom: 30rem;
+  /* position of vertical line */
+  left: var(--left);
+}
+
+.horiz-timeline ul:hover:after {
+  opacity: 1;
+}
+
+/* Mobile view */
+@media only screen and (max-width: 1205px) {
+}
+@media (max-width: 680px) {
+  .main-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .accordion-container {
+    display: block;
+  }
+}

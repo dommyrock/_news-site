@@ -3,6 +3,7 @@ import useSWR from "swr";
 import { Auth, Card, Typography, Space, Button, Icon } from "@supabase/ui";
 import { supabase } from "../utils/initSupabase";
 import { useEffect, useState } from "react";
+import VerticalTimeline from "../components/VerticalTimeline";
 
 const fetcher = (url, token) =>
   fetch(url, {
@@ -57,7 +58,7 @@ const Index = () => {
         </div>
       );
 
-    return <h2>ahhhaahhah</h2>;
+    return <VerticalTimeline>ahhhaahhah</VerticalTimeline>;
   };
 
   return <View />;
