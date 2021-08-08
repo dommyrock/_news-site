@@ -1,18 +1,21 @@
 import { useState } from "react";
 
-const timestampData = [2, 3, 4, 5, , 6, 7, 7, 8, 888, 8888, 8, 9, 10, 13, 15];
+const timestampData = [...Array(48).keys()];
 
 const VerticalTimeline = () => {
-  const timestamps = timestampData.map((num) => <li>{num}</li>);
-
   const [left, setState] = useState(0);
-  const styles = {
-    "--left": left + "px",
-  };
+
   const handleMouseMove = (e) => {
     let x = e.clientX;
     setState(x);
   };
+
+  const timestamps = timestampData.map((timestamp) => <li key={timestamp}>{timestamp}</li>);
+
+  const styles = {
+    "--left": left + "px",
+  };
+  //TODO swipe numbers https://github.com/xiaody/react-touch-carousel
 
   return (
     <div className="horiz-timeline">
@@ -31,3 +34,5 @@ const VerticalTimeline = () => {
 };
 
 export default VerticalTimeline;
+
+//dont forget this for current process /launch/build status https://codepen.io/roppazvan/pen/axgoYR
