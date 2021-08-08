@@ -15,6 +15,7 @@ body {
   --arcticBlue: #6997ff;
   --default-text-grey: #6f6d6d;
   --text-lightgrey: #c4c0c0;
+  --bg-darkgrey: rgb(68, 74, 79);
   --bg-color: #d8d8d8;
   --bg-colorDark: #4c4949;
   --bg-colorDarker: #302f2f;
@@ -50,6 +51,7 @@ body::-webkit-scrollbar-thumb {
 
 .horiz-timeline {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   text-align: center;
   margin-top: 8rem;
@@ -65,13 +67,19 @@ body::-webkit-scrollbar-thumb {
   background: #cacaca;
   margin: 0;
   padding: 0;
+  /* disable text selection */
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
 
 .horiz-timeline ul li {
   display: block;
   flex: 0 1 auto; /* Default */
   list-style-type: none;
-  padding: 0.6rem;
+  padding: 1rem;
+  /* Show on top so vertical lines is bellow it */
+  z-index: 10;
   /* transition: transform 250ms; */
 }
 
@@ -86,7 +94,7 @@ body::-webkit-scrollbar-thumb {
 /* Animated vertical lines [i got 2 linws top 2 bottom...]*/
 .horiz-timeline ul:after {
   content: "";
-  border-left: 5px solid rgb(68, 74, 79);
+  border-left: 5px solid var(--bg-colorDarker);
   position: absolute;
   opacity: 0;
   /* vertical line lenght outside of ul */
@@ -98,7 +106,25 @@ body::-webkit-scrollbar-thumb {
 
 .horiz-timeline ul:hover:after {
   opacity: 1;
+  z-index: 10;
 }
+.frost-backdrop-filter {
+  display: inherit;
+  position: absolute;
+  top: 1rem;
+  /* widht (x index of vertical line) */
+  width: var(--left);
+  /* height of vertical line */
+  height: 30rem;
+  border-radius: 6px;
+  /* better option is to take color similar to background  */
+  /* background: rgba(255, 255, 255, 0.2); */
+  background: #d8d8d8d9;
+  box-shadow: 0 0 2000px rgba(255, 255, 255, 0.2);
+  filter: blur(10px);
+}
+
+/* If i want animated vertical line see:https://stackoverflow.com/questions/52346454/how-to-animate-vertical-lines-growing-up-and-down-using-css */
 
 /* Mobile view */
 @media only screen and (max-width: 1205px) {
