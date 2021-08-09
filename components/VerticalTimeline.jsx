@@ -1,38 +1,91 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
-const timestampData = [...Array(48).keys()];
+const timestampData = [...Array(96).keys()];
+
+let scrollLeft;
+let startx;
 
 const VerticalTimeline = () => {
   const [left, setState] = useState(0);
+  const [isdown, setDown] = useState(false);
+  const timelineRef = useRef(null);
 
   const handleMouseMove = (e) => {
     let x = e.clientX;
     setState(x);
+    if (!isdown) return; //stop fn from running
+    e.preventDefault();
+    const xpos = x - timelineRef.current.offsetLeft;
+    const walk = xpos - startx;
+    timelineRef.current.scrollLeft = scrollLeft - walk;
   };
-
-  const timestamps = timestampData.map((timestamp) => <li key={timestamp}>{timestamp}</li>);
+  const handleMouseUp = (e) => {
+    setDown(false);
+  };
+  const handleMouseLeave = (e) => {
+    setDown(false);
+  };
+  const handleMouseDown = (e) => {
+    setDown(true);
+    startx = e.clientX - timelineRef.current.offsetLeft;
+    scrollLeft = timelineRef.current.scrollLeft;
+  };
 
   const styles = {
     "--left": left + "px",
   };
-  //TODO swipe numbers https://github.com/xiaody/react-touch-carousel
+  const handleBack = (e) => {
+    timelineRef.current.scrollTo({ left: 0, top: 0, behavior: "smooth" });
+  };
 
   return (
-    <div className="horiz-timeline">
-      <ul onMouseMove={(e) => handleMouseMove(e)} style={styles}>
-        <div style={{ display: "inherit", width: "var(--left)" }}>{timestamps}</div>
-        {/* {timestamps} */}
-      </ul>
-      <div>
-        <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
-        <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
-        <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
+    <>
+      <button onClick={(e) => handleBack(e)} style={{ position: "sticky" }}>
+        back
+      </button>
+      <div
+        id="timeline-container"
+        className="horiz-timeline"
+        ref={timelineRef}
+        onMouseMove={(e) => handleMouseMove(e)}
+        onMouseUp={(e) => handleMouseUp(e)}
+        onMouseDown={(e) => handleMouseDown(e)}
+        onMouseLeave={(e) => handleMouseLeave(e)}
+      >
+        <div>
+          {/* <div style={{ display: "inherit", width: "var(--left)" }}> */}
+          <ul style={styles}>
+            {timestampData &&
+              timestampData.map((timestamp) => (
+                <li id={timestamp} key={timestamp}>
+                  {timestamp}
+                </li>
+              ))}
+          </ul>
+          {/* </div> */}
+        </div>
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
+          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
+          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
+          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
+          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
+          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
+          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
+          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
+          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
+          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
+          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
+          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
+          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
+          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
+          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
+        </div>
+        <div className="frost-backdrop-filter" style={styles}></div>
       </div>
-      <div className="frost-backdrop-filter" style={styles}></div>
-    </div>
+    </>
   );
 };
 
 export default VerticalTimeline;
-
 //dont forget this for current process /launch/build status https://codepen.io/roppazvan/pen/axgoYR
