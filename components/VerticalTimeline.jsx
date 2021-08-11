@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 const timestampData = [...Array(96).keys()];
 
 let scrollLeft;
-let startx;
+let start_x;
 
 const VerticalTimeline = () => {
   const [left, setState] = useState(0);
@@ -16,7 +16,7 @@ const VerticalTimeline = () => {
     if (!isdown) return; //stop fn from running
     e.preventDefault();
     const xpos = x - timelineRef.current.offsetLeft;
-    const walk = xpos - startx;
+    const walk = xpos - start_x;
     timelineRef.current.scrollLeft = scrollLeft - walk;
   };
   const handleMouseUp = (e) => {
@@ -27,7 +27,7 @@ const VerticalTimeline = () => {
   };
   const handleMouseDown = (e) => {
     setDown(true);
-    startx = e.clientX - timelineRef.current.offsetLeft;
+    start_x = e.clientX - timelineRef.current.offsetLeft;
     scrollLeft = timelineRef.current.scrollLeft;
   };
 
