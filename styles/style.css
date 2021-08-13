@@ -55,6 +55,10 @@ body::-webkit-scrollbar-thumb {
   justify-content: center;
   text-align: center;
   margin-top: 8rem;
+  /* disable text selection */
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
   /* THIS IS IMPORTANT here1
    TO ENABLE SCROLLING TRIMELINE DIV INTO VIEW */
   overflow-x: hidden;
@@ -67,13 +71,8 @@ body::-webkit-scrollbar-thumb {
   align-items: stretch; /* Default */
   justify-content: space-between;
   width: 100%;
-  background: #cacaca;
   margin: 0;
   padding: 0;
-  /* disable text selection */
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
 }
 
 .horiz-timeline ul li {
@@ -81,9 +80,9 @@ body::-webkit-scrollbar-thumb {
   flex: 0 1 auto; /* Default */
   list-style-type: none;
   padding: 0.5rem;
+  background: #cacaca;
   /* Show on top so vertical lines is bellow it */
   z-index: 10;
-  /* transition: transform 250ms; */
 }
 
 .horiz-timeline ul li:hover {
@@ -93,7 +92,6 @@ body::-webkit-scrollbar-thumb {
   border-radius: 20%;
   transition: ease-in-out 200ms;
   cursor: pointer;
-  /* transform: translateY(-5px); */
 }
 
 /* Animated vertical lines [i got 2 linws top 2 bottom...]*/
@@ -110,9 +108,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 .horiz-timeline ul:hover:after {
+  /* display vertical border in full color */
   opacity: 1;
-  /* timeline dates are z=10, vartical line has to be under*/
-  z-index: 5;
 }
 .frost-backdrop-filter {
   display: inherit;
@@ -128,6 +125,7 @@ body::-webkit-scrollbar-thumb {
   background: #d8d8d8d9;
   box-shadow: 0 0 2000px rgba(255, 255, 255, 0.2);
   filter: blur(10px);
+  z-index: 999;
 }
 
 /* sample circle without outer circle shape */

@@ -6,13 +6,13 @@ let scrollLeft;
 let start_x;
 
 const VerticalTimeline = () => {
-  const [left, setState] = useState(0);
+  const [left, setLeft] = useState(0);
   const [isdown, setDown] = useState(false);
   const timelineRef = useRef(null);
 
   const handleMouseMove = (e) => {
     let x = e.clientX;
-    setState(x);
+    setLeft(x);
     if (!isdown) return; //stop fn from running
     e.preventDefault();
     const xpos = x - timelineRef.current.offsetLeft;
@@ -30,12 +30,16 @@ const VerticalTimeline = () => {
     start_x = e.clientX - timelineRef.current.offsetLeft;
     scrollLeft = timelineRef.current.scrollLeft;
   };
+  const handleBack = (e) => {
+    timelineRef.current.scrollTo({ left: 0, top: 0, behavior: "smooth" });
+  };
 
   const styles = {
     "--left": left + "px",
   };
-  const handleBack = (e) => {
-    timelineRef.current.scrollTo({ left: 0, top: 0, behavior: "smooth" });
+  // Fove frost tol left because it makes ul items unhoverable
+  const frostStyle = {
+    "--left": left - 20 + "px",
   };
 
   return (
@@ -81,7 +85,7 @@ const VerticalTimeline = () => {
           <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
           <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
         </div>
-        <div className="frost-backdrop-filter" style={styles}></div>
+        <div className="frost-backdrop-filter" style={frostStyle}></div>
       </div>
     </>
   );
