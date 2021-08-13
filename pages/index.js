@@ -1,4 +1,3 @@
-import Link from "next/link";
 import useSWR from "swr";
 import { Auth, Card, Typography, Space, Button, Icon } from "@supabase/ui";
 import { supabase } from "../utils/initSupabase";
@@ -58,7 +57,11 @@ const Index = () => {
         </div>
       );
 
-    return <VerticalTimeline>ahhhaahhah</VerticalTimeline>;
+    return (
+      <>
+        <VerticalTimeline></VerticalTimeline>
+      </>
+    );
   };
 
   return <View />;

@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-
+import { useState, useRef, useEffect } from "react";
+import spacexData from "../test_Data.json";
 const timestampData = [...Array(96).keys()];
 
 let scrollLeft;
@@ -33,6 +33,9 @@ const VerticalTimeline = () => {
   const handleBack = (e) => {
     timelineRef.current.scrollTo({ left: 0, top: 0, behavior: "smooth" });
   };
+  const handleTimelineItemClick = (e) => {
+    console.log(e.target);
+  };
 
   const styles = {
     "--left": left + "px",
@@ -41,6 +44,12 @@ const VerticalTimeline = () => {
   const frostStyle = {
     "--left": left - 20 + "px",
   };
+  useEffect(() => {
+    console.log(spacexData);
+    // return () => {
+    //   cleanup;
+    // };
+  }, []);
 
   return (
     <>
@@ -59,24 +68,15 @@ const VerticalTimeline = () => {
         <div>
           {/* <div style={{ display: "inherit", width: "var(--left)" }}> */}
           <ul style={styles}>
-            {timestampData &&
-              timestampData.map((timestamp) => (
-                <li id={timestamp} key={timestamp}>
-                  {timestamp}
-                </li>
-              ))}
+            {timestampData?.map((timestamp) => (
+              <li id={timestamp} key={timestamp} onClick={(e) => handleTimelineItemClick(e)}>
+                {timestamp}
+              </li>
+            ))}
           </ul>
           {/* </div> */}
         </div>
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
-          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
-          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
-          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
-          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
-          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
-          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
-          <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
           <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
           <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
           <h3>ahahahahhahaha dhhadhahdadadhdhadhahdahd ahd ahd hhad </h3>
@@ -90,6 +90,7 @@ const VerticalTimeline = () => {
     </>
   );
 };
+//TODO :ad SSR fetch by next here  (Server side props to fetch initial data on server before render)
 
 export default VerticalTimeline;
 //dont forget this for current process /launch/build status https://codepen.io/roppazvan/pen/axgoYR

@@ -1,6 +1,3 @@
-
-
-  
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
 import { GA_TRACKING_ID } from "../lib/gtag";
@@ -10,7 +7,7 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="icon" href="/favicon.ico" type = "image/x-icon"/>
+          <link rel="icon" href="/favicon.ico" type="image/x-icon" />
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
           <script
@@ -28,7 +25,7 @@ export default class MyDocument extends Document {
           {/* FONTS */}
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap" rel="stylesheet" />
-
+          <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         </Head>
         <body>
           <Main />
